@@ -12,30 +12,40 @@ public class DataReader extends CSVDataReader
 	public List<String> getPersons(String criterium, SearchType type) throws IOException
 	{
 		CSVDataReader search = new CSVDataReader();
+		List<String> personList = new ArrayList<>();
 
 		if (type.MANDATORY == type)
 		{
-			List<String> mandList = new ArrayList<>();
+			int result = 0;
+			String bestPerson = "";
 
 			for (String string : search.CSVDataReader(criterium))
 			{
-				int result = 0;
 
 				String[] dataLine = string.split(",");
 
 				if (result <= Integer.parseInt(dataLine[4]))
 				{
-					mandList.add(string);
+					result = Integer.parseInt(dataLine[4]);
+					bestPerson = string;
 
 				}
-				return mandList;
+
 			}
+			personList.add(bestPerson);
 
 		}
 		if (type.OPTIONAL == type)
 		{
+			for (String string : search.CSVDataReader(criterium))
+			{
+
+				personList.add(string);
+
+			}
 
 		}
+		return personList;
 
 	}
 
