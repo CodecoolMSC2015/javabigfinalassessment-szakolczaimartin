@@ -6,12 +6,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class CSVDataReader
 {
 	String csvFilePath = "C:\\Users\\Szakolczai Martin\\Desktop\\persons.csv";
 
-	public void CSVDataReader(String criterium) throws IOException
+	public List<String> CSVDataReader(String criterium) throws IOException
 	{
 		FileInputStream fstream = new FileInputStream(csvFilePath);
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
@@ -28,11 +29,18 @@ public class CSVDataReader
 				if (dataLine[2].toLowerCase().equals(criteriumArray[i].toLowerCase()))
 				{
 					person.add(line);
+
 				}
 			}
-			br.close();
 
 		}
+		br.close();
+		return person;
+	}
+
+	public Set<Person> getPerson()
+	{
+		return null;
 	}
 
 }
