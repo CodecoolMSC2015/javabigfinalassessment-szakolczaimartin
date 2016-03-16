@@ -9,11 +9,11 @@ import java.util.List;
 
 public class CSVDataReader
 {
-	String csvFilePath;
+	String csvFilePath = "C:\\Users\\Szakolczai Martin\\Desktop\\persons.csv";
 
-	public void CSVDataReader(String filePath) throws IOException
+	public void CSVDataReader(String criterium) throws IOException
 	{
-		FileInputStream fstream = new FileInputStream(filePath);
+		FileInputStream fstream = new FileInputStream(csvFilePath);
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 		List<String> person = new ArrayList<>();
 
@@ -21,10 +21,18 @@ public class CSVDataReader
 
 		while ((line = br.readLine()) != null)
 		{
-			person.add(line);
-		}
-		br.close();
+			String[] criteriumArray = criterium.split(",");
+			String[] dataLine = line.split(",");
+			for (int i = 0; i < criteriumArray.length; i++)
+			{
+				if (dataLine[2].toLowerCase().equals(criteriumArray[i].toLowerCase()))
+				{
+					person.add(line);
+				}
+			}
+			br.close();
 
+		}
 	}
 
 }
