@@ -10,7 +10,6 @@ import java.util.List;
 public class CSVDataReader
 {
 	String csvFilePath;
-	List<Person> person;
 
 	public void CSVDataReader(String filePath) throws IOException
 	{
