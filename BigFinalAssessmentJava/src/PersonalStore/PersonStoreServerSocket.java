@@ -31,6 +31,7 @@ public class PersonStoreServerSocket
 			while (true)
 			{
 				firstString = reader.readLine();
+				System.out.println(firstString);
 				secondString = reader.readLine();
 
 				if (firstString.equals("MANDATORY"))
@@ -47,7 +48,7 @@ public class PersonStoreServerSocket
 					reader.readLine();
 					DataReader search = new DataReader();
 
-					System.out.println(search.getPersons(secondString, SearchType.OPTIONAL));
+					System.out.println(search.getPersons(secondString, SearchType.MANDATORY));
 
 				}
 
