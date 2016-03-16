@@ -8,11 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class CSVDataReader
+public class CSVDataReader extends DataReader
 {
 	String csvFilePath = "C:\\Users\\Szakolczai Martin\\Desktop\\persons.csv";
 
-	public List<String> CSVDataReader(String criterium) throws IOException
+	public Set<Person> CSVDataReader()
+	{
+		return null;
+	}
+
+	public List<String> search(String criterium) throws IOException
 	{
 		FileInputStream fstream = new FileInputStream(csvFilePath);
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
@@ -36,11 +41,47 @@ public class CSVDataReader
 		}
 		br.close();
 		return person;
+
 	}
 
-	public Set<Person> getPerson()
+	@Override
+	public List<String> getPersons(String criterium, SearchType type) throws NumberFormatException, IOException
 	{
-		return null;
+
+		List<String> personList = new ArrayList<>();
+
+		if (type.MANDATORY == type)
+		{
+			int result = 0;
+			String bestPerson = "";
+
+			for (String string : search(criterium))
+			{
+
+				String[] dataLine = string.split(",");
+
+				if (result <= Integer.parseInt(dataLine[4]))
+				{
+					result = Integer.parseInt(dataLine[4]);
+					bestPerson = string;
+
+				}
+
+			}
+			personList.add(bestPerson);
+
+		}
+		if (type.OPTIONAL == type)
+		{
+			for (String string : search(criterium))
+			{
+
+				personList.add(string);
+
+			}
+
+		}
+		return personList;
 	}
 
 }

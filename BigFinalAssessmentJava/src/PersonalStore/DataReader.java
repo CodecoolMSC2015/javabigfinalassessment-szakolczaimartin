@@ -1,53 +1,15 @@
 package PersonalStore;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-public class DataReader extends CSVDataReader
+public abstract class DataReader
 {
 	String searchCritiria;
 	SearchType searchType;
 
-	public List<String> getPersons(String criterium, SearchType type) throws IOException
-	{
-		CSVDataReader search = new CSVDataReader();
-		List<String> personList = new ArrayList<>();
-
-		if (type.MANDATORY == type)
-		{
-			int result = 0;
-			String bestPerson = "";
-
-			for (String string : search.CSVDataReader(criterium))
-			{
-
-				String[] dataLine = string.split(",");
-
-				if (result <= Integer.parseInt(dataLine[4]))
-				{
-					result = Integer.parseInt(dataLine[4]);
-					bestPerson = string;
-
-				}
-
-			}
-			personList.add(bestPerson);
-
-		}
-		if (type.OPTIONAL == type)
-		{
-			for (String string : search.CSVDataReader(criterium))
-			{
-
-				personList.add(string);
-
-			}
-
-		}
-		return personList;
-
-	}
+	public abstract List<String> getPersons(String criterium, SearchType type)
+			throws NumberFormatException, IOException;
 
 	public void setSearchCritiria(String searchCritiria)
 	{

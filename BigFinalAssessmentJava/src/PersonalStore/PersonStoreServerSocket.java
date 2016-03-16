@@ -31,24 +31,30 @@ public class PersonStoreServerSocket
 			while (true)
 			{
 				firstString = reader.readLine();
-				System.out.println(firstString);
 				secondString = reader.readLine();
 
 				if (firstString.equals("MANDATORY"))
 				{
 					reader.readLine();
-					DataReader search = new DataReader();
-
-					System.out.println(search.getPersons(secondString, SearchType.MANDATORY));
+					CSVDataReader searching = new CSVDataReader();
+					System.out.println("The best person for us: ");
+					System.out.println(searching.getPersons(secondString, SearchType.MANDATORY));
 
 				}
 
 				if (firstString.equals("OPTIONAL"))
 				{
 					reader.readLine();
-					DataReader search = new DataReader();
+					CSVDataReader searching = new CSVDataReader();
+					System.out.println("Good persons for us: \n");
 
-					System.out.println(search.getPersons(secondString, SearchType.MANDATORY));
+					for (String persons : searching.getPersons(secondString, SearchType.OPTIONAL))
+					{
+						System.out.println(persons);
+
+					}
+					// System.out.println(searching.getPersons(secondString,
+					// SearchType.OPTIONAL));
 
 				}
 
